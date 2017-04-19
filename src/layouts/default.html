@@ -1,0 +1,234 @@
+{{!-- This is the base layout for your project, and will be used on every page. --}}
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow" />   <!-- ROMOVE THIS WHEN DONE -->
+    <title>The New York Code + Design Academy</title>
+    <script type="text/javascript" src="//fast.fonts.net/jsapi/c5620592-dbff-4341-8acc-46b7d407c197.js"></script>
+    <link rel="stylesheet" href="{{root}}assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+  </head>
+  <body>
+
+    {{!-- Pages you create in the src/pages/ folder are inserted here when the flattened page is created. --}}
+    {{> body}}
+
+
+
+<script src="{{root}}assets/js/app.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $('#location-tabs ul li a').click(function(){
+  var targetLocation = $(this).attr('href');
+  if (targetLocation != undefined && targetLocation != '#') {
+      targetLocation = targetLocation.replace('#', '');
+      var tabText = $(this).text();
+      $('#initial-tab').text(tabText);
+
+    $('.tabs-panel').each(function(){
+      var panelID = $(this).attr('id');
+
+      if (panelID == targetLocation) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+
+    });
+
+  }
+  });
+
+
+  $('.carousel').slick({
+    dots: true,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          centerMode: true,
+          centerPadding: '10px',
+          initialSlide: 0,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          arrows: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 639,
+        settings: {
+          centerMode: true,
+          centerPadding: '20px',
+          initialSlide: 0,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          centerMode: true,
+          centerPadding: '20px',
+          initialSlide: 1,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+});
+
+
+$(document).ready(function(){
+  $('.slick-nav').slick({
+    variableWidth: true,
+    dots: false,
+    arrows: false,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          centerPadding: '10px',
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          centerPadding: '20px',
+          initialSlide: 0,
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          centerPadding: '0px',
+          initialSlide: 0,
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+});
+
+
+function sameHeights(selector) {
+    var selector = selector || '[data-key="sameHeights"]',
+        query = document.querySelectorAll(selector),
+        elements = query.length,
+        max = 0;
+    if (elements) {
+        while (elements--) {
+            var element = query[elements];
+            if (element.clientHeight > max) {
+                max = element.clientHeight;
+            }
+        }
+        elements = query.length;
+        while (elements--) {
+            var element = query[elements];
+            element.style.height = max + 'px';
+        }
+    }
+}
+
+if ('addEventListener' in window) {
+    window.addEventListener('resize', function(){
+        sameHeights();
+    });
+    window.addEventListener('load', function(){
+        sameHeights();
+    });
+}
+
+myID = document.getElementById("myID");
+
+var myScrollFunc = function () {
+    var y = window.scrollY;
+    if (y >= 800) {
+        myID.className = "bottomMenu show"
+    } else {
+        myID.className = "bottomMenu hide"
+    }
+};
+
+window.addEventListener("scroll", myScrollFunc);
+
+$('#toggle').click(function() {
+   $(this).toggleClass('active');
+   $('#overlay').toggleClass('open');
+  });
+
+$('#toggle2').click(function() {
+   $(this).toggleClass('active');
+   $('#overlay2').toggleClass('open');
+  });
+
+  $(".swap-text").on("click", function() {
+  $(this).toggleClass("on");
+});
+
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 20;
+var navbarHeight = $('#header').outerHeight();
+
+$(window).scroll(function(event){
+   didScroll = true;
+});
+
+setInterval(function() {
+   if (didScroll) {
+       hasScrolled();
+       didScroll = false;
+   }
+}, 250);
+
+function hasScrolled() {
+   var st = $(this).scrollTop();
+
+   // Make sure they scroll more than delta
+   if(Math.abs(lastScrollTop - st) <= delta)
+       return;
+
+   if ($(window).width() > 1023) {
+   // If they scrolled down and are past the navbar, add class .nav-up.
+   // This is necessary so you never see what is "behind" the navbar.
+   if (st > lastScrollTop && st > navbarHeight){
+       // Scroll Down
+       $('#header').removeClass('nav-down').addClass('nav-up');
+   } else {
+       // Scroll Up
+       if(st + $(window).height() < $(document).height()) {
+           $('#header').removeClass('nav-up').addClass('nav-down');
+       }
+     }
+   }
+
+   lastScrollTop = st;
+}
+
+</script>
+
+  </body>
+</html>

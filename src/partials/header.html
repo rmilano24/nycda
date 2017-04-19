@@ -1,0 +1,45 @@
+<header id="header">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="large">
+          <span class="logo-mobile">{{>svg-logo}}</span>
+
+          <div class="button_container" id="toggle">
+            <span class="top"></span>
+            <span class="middle"></span>
+            <span class="bottom"></span>
+          </div>
+      </div>
+
+      <div class="top-bar" id="main-menu">
+        <div class="top-bar-left">
+          {{>svg-logo}}
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu" data-responsive-menu="drilldown large-dropdown">
+            <li><a href="/career-services">What We Do</a></li>
+            <li><a href="/career-services">What You’ll Get</a></li>
+            <li><a href="/courses">Programs & Courses</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/students/sign_in">Student Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+</header>
+
+<div class="fixed-wrapper"><div id="myID" class="bottomMenu hide"><a id="request-info" class="button small fixed" data-open="requestInformation"><img class="triangle" src="/assets/img/info_triangle.svg" alt="">Request Info</a></div></div>
+
+<a id="live-chat" class="button small fixed" href="#"><img class="triangle" src="/assets/img/chat_triangle.svg" alt=""><span>Live Chat</span></a>
+
+<div class="reveal" id="requestInformation" aria-labelledby="exampleModalHeader11" data-reveal>
+
+  {{>form}}
+
+  <button class="close-button" data-close aria-label="Close Accessible Modal" type="button">
+    <span aria-hidden="true"></span>
+  </button>
+</div>
